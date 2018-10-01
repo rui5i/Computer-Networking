@@ -51,9 +51,22 @@ def build_message(list):
 # send message to server over socket
 s.sendall(build_message(list) + '\n'.encode('utf-8'))
 print('[info] Client sent:', build_message(list) + "\n".encode('utf-8'))
-# receive data
-resp = recvall(s)
-print('[info] response from server:', resp)
+# receive data and decode it following zhifeng's protocal
+raw_resp = recvall(s)
+resp = []
+result_amt = struct.unpack('>H', raw_resp[0:2])[0]
+resp.append(result_amt)
+start = 2
+while result_amt > 0:
+    result_len = struct.unpack('>H', raw_resp[start:start + 2])[0]
+    start += 2
+    result = raw_resp[start:start + result_len].decode('utf-8')
+    resp.append(result_len)
+    resp.append(result)
+    start += result_len
+    result_amt -= 1
+print('[info] raw response from server:', raw_resp)
+print('[info] response decoded:', resp)
 
 # close socket to send EOF to server
 s.close()
