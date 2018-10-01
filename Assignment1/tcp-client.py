@@ -6,7 +6,7 @@ import struct
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # connect to host and port
-server_ip = '127.0.0.1'
+server_ip = '35.230.71.159'
 server_port = 8181
 s.connect((server_ip, server_port))
 print('[info] Successfully connected to host {}:{}'.format(server_ip, server_port))

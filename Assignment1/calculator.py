@@ -41,8 +41,8 @@ def calculate(s):
             # do calculation when meeting ')'
             while len(ops_stack) != 0 and ops_stack[-1] != '(':
                 num_stack.append(int(operation(ops_stack.pop(), num_stack.pop(), num_stack.pop())))
-                # get rid of '(' associated
-                if len(ops_stack) != 0: ops_stack.pop()
+            # get rid of '(' associated
+            if len(ops_stack) != 0: ops_stack.pop()
         elif elem == '-' and (index == 0 or not s[index - 1].isdigit()):
             # if elem is an along negative number, make '-5' to '0-5'
             num_stack.append(0)
