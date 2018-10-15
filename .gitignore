@@ -2,3 +2,6 @@
 *.png
 *.txt
 *.zip
+*.pdf
+*/capture
+*/__pycache__
